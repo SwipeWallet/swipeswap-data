@@ -1,4 +1,4 @@
-# swipe-swap-data
+# swipeswap-data
 
 This is a collection of utilities to query SwipeSwap data from Ethereum. This
 data has been indexed by the Graph via the subgraph the SwipeSwap team maintains.
@@ -78,9 +78,9 @@ The below all return an Observable that when subscribed to with an object.
 ## Example
 
 ```javascript
-const swipeData = require('@swipewallet/swap-data'); // common js
+const swipeData = require('@swipewallet/swipeswap-data'); // common js
 // or
-import swipeData from '@swipewallet/swap-data'; // es modules
+import swipeData from '@swipewallet/swipeswap-data'; // es modules
 
 // query and log resolved results
 swipeData.masterchef
