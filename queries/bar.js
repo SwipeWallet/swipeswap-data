@@ -47,7 +47,7 @@ module.exports = {
     },
 
     async user({block = undefined, timestamp = undefined, user_address = undefined} = {}) {
-        if(!user_address) { throw new Error("sushi-data: User address undefined"); }
+        if(!user_address) { throw new Error("swipe-data: User address undefined"); }
 
         block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
         block = block ? `block: { number: ${block} }` : "";
@@ -68,18 +68,18 @@ const info = {
     properties: [
         'decimals',
         'name',
-        'sushi',
+        'swipe',
         'symbol',
         'totalSupply',
         'ratio',
-        'xSushiMinted',
-        'xSushiBurned',
-        'sushiStaked',
-        'sushiStakedUSD',
-        'sushiHarvested',
-        'sushiHarvestedUSD',
-        'xSushiAge',
-        'xSushiAgeDestroyed',
+        'xSwipeMinted',
+        'xSwipeBurned',
+        'swipeStaked',
+        'swipeStakedUSD',
+        'swipeHarvested',
+        'swipeHarvestedUSD',
+        'xSwipeAge',
+        'xSwipeAgeDestroyed',
         'updatedAt'
     ],
 
@@ -87,18 +87,18 @@ const info = {
         return ({
             decimals: Number(results.decimals),
             name: results.name,
-            sushi: results.sushi,
+            swipe: results.swipe,
             symbol: results.symbol,
             totalSupply: Number(results.totalSupply),
             ratio: Number(results.ratio),
-            xSushiMinted: Number(results.xSushiMinted),
-            xSushiBurned: Number(results.xSushiBurned),
-            sushiStaked: Number(results.totalSupply) * Number(results.ratio),
-            sushiStakedUSD: Number(results.sushiStakedUSD),
-            sushiHarvested: Number(results.sushiHarvested),
-            sushiHarvestedUSD: Number(results.sushiHarvestedUSD),
-            xSushiAge: Number(results.xSushiAge),
-            xSushiAgeDestroyed: Number(results.xSushiAgeDestroyed),
+            xSwipeMinted: Number(results.xSwipeMinted),
+            xSwipeBurned: Number(results.xSwipeBurned),
+            swipeStaked: Number(results.totalSupply) * Number(results.ratio),
+            swipeStakedUSD: Number(results.swipeStakedUSD),
+            swipeHarvested: Number(results.swipeHarvested),
+            swipeHarvestedUSD: Number(results.swipeHarvestedUSD),
+            xSwipeAge: Number(results.xSwipeAge),
+            xSwipeAgeDestroyed: Number(results.xSwipeAgeDestroyed),
             updatedAt: Number(results.updatedAt)
         })
     }
@@ -106,47 +106,47 @@ const info = {
 
 const user = {
     properties: [
-        'xSushi',
-        'xSushiIn',
-        'xSushiOut',
-        'xSushiMinted',
-        'xSushiBurned',
-        'xSushiOffset',
-        'xSushiAge',
-        'xSushiAgeDestroyed',
-        'sushiStaked',
-        'sushiStakedUSD',
-        'sushiHarvested',
-        'sushiHarvestedUSD',
-        'sushiIn',
-        'sushiOut',
+        'xSwipe',
+        'xSwipeIn',
+        'xSwipeOut',
+        'xSwipeMinted',
+        'xSwipeBurned',
+        'xSwipeOffset',
+        'xSwipeAge',
+        'xSwipeAgeDestroyed',
+        'swipeStaked',
+        'swipeStakedUSD',
+        'swipeHarvested',
+        'swipeHarvestedUSD',
+        'swipeIn',
+        'swipeOut',
         'usdOut',
         'usdIn',
         'updatedAt',
-        'sushiOffset',
+        'swipeOffset',
         'usdOffset'
     ],
 
     callback(results) {
         return ({
-            xSushi: Number(results.xSushi),
-            xSushiIn: Number(results.xSushiIn),
-            xSushiOut: Number(results.xSushiOut),
-            xSushiMinted: Number(results.xSushiMinted),
-            xSushiBurned: Number(results.xSushiBurned),
-            xSushiOffset: Number(results.xSushiOffset),
-            xSushiAge: Number(results.xSushiAge),
-            xSushiAgeDestroyed: Number(results.xSushiAgeDestroyed),
-            sushiStaked: Number(results.sushiStaked),
-            sushiStakedUSD: Number(results.sushiStakedUSD),
-            sushiHarvested: Number(results.sushiHarvested),
-            sushiHarvestedUSD: Number(results.sushiHarvestedUSD),
-            sushiIn: Number(results.sushiIn),
-            sushiOut: Number(results.sushiOut),
+            xSwipe: Number(results.xSwipe),
+            xSwipeIn: Number(results.xSwipeIn),
+            xSwipeOut: Number(results.xSwipeOut),
+            xSwipeMinted: Number(results.xSwipeMinted),
+            xSwipeBurned: Number(results.xSwipeBurned),
+            xSwipeOffset: Number(results.xSwipeOffset),
+            xSwipeAge: Number(results.xSwipeAge),
+            xSwipeAgeDestroyed: Number(results.xSwipeAgeDestroyed),
+            swipeStaked: Number(results.swipeStaked),
+            swipeStakedUSD: Number(results.swipeStakedUSD),
+            swipeHarvested: Number(results.swipeHarvested),
+            swipeHarvestedUSD: Number(results.swipeHarvestedUSD),
+            swipeIn: Number(results.swipeIn),
+            swipeOut: Number(results.swipeOut),
             usdOut: Number(results.usdOut),
             usdIn: Number(results.usdIn),
             updatedAt: Number(results.updatedAt),
-            sushiOffset: Number(results.sushiOffset),
+            swipeOffset: Number(results.swipeOffset),
             usdOffset: Number(results.usdOffset)
         })
     }

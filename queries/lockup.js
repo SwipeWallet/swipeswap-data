@@ -34,10 +34,10 @@ const user = {
         'address',
         'amount',
         'rewardDebt',
-        'pool { id, balance, accSushiPerShare }',
-        'sushiAtLockup',
-        'sushiHarvestedSinceLockup',
-        'sushiLocked',
+        'pool { id, balance, accSwipePerShare }',
+        'swipeAtLockup',
+        'swipeHarvestedSinceLockup',
+        'swipeLocked',
     ],
 
     callback(results) {
@@ -49,11 +49,11 @@ const user = {
             pool: {
                 id: entry.pool.id,
                 balance: Number(entry.pool.balance),
-                accSushiPerShare: Number(entry.pool.accSushiPerShare)
+                accSwipePerShare: Number(entry.pool.accSwipePerShare)
             },
-            sushiAtLockup: Number(entry.sushiAtLockup),
-            sushiHarvestedSinceLockup: Number(entry.sushiHarvestedSinceLockup),
-            sushiLocked: Number(entry.sushiLocked),
+            swipeAtLockup: Number(entry.swipeAtLockup),
+            swipeHarvestedSinceLockup: Number(entry.swipeHarvestedSinceLockup),
+            swipeLocked: Number(entry.swipeLocked),
         }));
     }
 };

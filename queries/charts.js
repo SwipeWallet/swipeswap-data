@@ -37,7 +37,7 @@ module.exports = {
     },
 
     async tokenHourly({token_address = undefined, startTime = undefined}) {
-        if(!token_address) { throw new Error("sushi-data: Token address undefined"); }
+        if(!token_address) { throw new Error("swipe-data: Token address undefined"); }
 
         let [tokenData, ethPrices] = await Promise.all([
              tokenHourData({minTimestamp: startTime, token_address}),
@@ -66,7 +66,7 @@ module.exports = {
     },
 
     async tokenDaily({token_address = undefined} = {}) {
-        if(!token_address) { throw new Error("sushi-data: Token address undefined"); }
+        if(!token_address) { throw new Error("swipe-data: Token address undefined"); }
         
         let data = await tokenDayData({token_address});
         const endTime = getUnixTime(new Date());
@@ -123,7 +123,7 @@ module.exports = {
     },
 
     async pairHourly({pair_address = undefined, startTime = undefined}) {
-        if(!pair_address) { throw new Error("sushi-data: Pair address undefined"); }
+        if(!pair_address) { throw new Error("swipe-data: Pair address undefined"); }
 
         let pairData = await pairHourData({minTimestamp: startTime, pair_address});
 
@@ -149,7 +149,7 @@ module.exports = {
     },
 
     async pairDaily({pair_address = undefined} = {}) {
-        if(!pair_address) { throw new Error("sushi-data: Pair address undefined"); }
+        if(!pair_address) { throw new Error("swipe-data: Pair address undefined"); }
 
         let data = await pairDayData({pair_address});
         const endTime = getUnixTime(new Date());

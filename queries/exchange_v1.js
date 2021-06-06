@@ -10,7 +10,7 @@ const { timestampToBlock } = require('../utils')
 
 module.exports = {
     userHistory({minTimestamp = undefined, maxTimestamp = undefined, minBlock = undefined, maxBlock = undefined, user_address = undefined, max = undefined} = {}) {
-        if(!user_address) { throw new Error("sushi-data: User address undefined"); }
+        if(!user_address) { throw new Error("swipe-data: User address undefined"); }
 
         return pageResults({
             api: graphAPIEndpoints.exchange_v1,
@@ -34,7 +34,7 @@ module.exports = {
     },
 
     async userPositions({block = undefined, timestamp = undefined, user_address = undefined} = {}) {
-        if(!user_address) { throw new Error("sushi-data: User address undefined"); }
+        if(!user_address) { throw new Error("swipe-data: User address undefined"); }
 
         return pageResults({
             api: graphAPIEndpoints.exchange_v1,

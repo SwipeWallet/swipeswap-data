@@ -6,7 +6,7 @@ const { graphAPIEndpoints, chefAddress, TWENTY_FOUR_HOURS } = require('./../cons
 const { timestampToBlock, getAverageBlockTime } = require('./../utils');
 
 const { pairs: exchangePairs } = require('./exchange');
-const { priceUSD: sushiPriceUSD } = require('./sushi');
+const { priceUSD: swipePriceUSD } = require('./swipe');
 
 module.exports = {
     async info({block = undefined, timestamp = undefined} = {}) {
@@ -25,7 +25,7 @@ module.exports = {
     },
 
     async pool({block = undefined, timestamp = undefined, pool_id = undefined, pool_address = undefined} = {}) {
-        if(!pool_id && !pool_address) { throw new Error("sushi-data: Pool ID / Address undefined"); }
+        if(!pool_id && !pool_address) { throw new Error("swipe-data: Pool ID / Address undefined"); }
 
         block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
         block = block ? `block: { number: ${block} }` : "";
@@ -71,7 +71,7 @@ module.exports = {
     },
 
     async stakedValue({block = undefined, timestamp = undefined, token_address = undefined} = {}) {
-        if(!token_address) { throw new Error("sushi-data: Token address undefined"); }
+        if(!token_address) { throw new Error("swipe-data: Token address undefined"); }
 
         block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
         block = block ? `block: { number: ${block} }` : "";
@@ -88,7 +88,7 @@ module.exports = {
     },
 
     async user({block = undefined, timestamp = undefined, user_address = undefined} = {}) {
-        if(!user_address) { throw new Error("sushi-data: User address undefined"); }
+        if(!user_address) { throw new Error("swipe-data: User address undefined"); }
 
         return pageResults({
             api: graphAPIEndpoints.masterchef,
@@ -110,7 +110,7 @@ module.exports = {
     async apys({block = undefined, timestamp = undefined} = {}) {
         const masterchefList = await module.exports.pools({block, timestamp});
         const exchangeList = await exchangePairs({block, timestamp});
-        const sushiUSD = await sushiPriceUSD({block, timestamp});
+        const swipeUSD = await swipePriceUSD({block, timestamp});
 
         const totalAllocPoint = masterchefList.reduce((a, b) => a + b.allocPoint, 0);
 
@@ -123,8 +123,8 @@ module.exports = {
             }
 
             const tvl = masterchefPool.slpBalance * (exchangePool.reserveUSD / exchangePool.totalSupply);
-            const sushiPerBlock = (masterchefPool.allocPoint / (totalAllocPoint) * 100);
-            const apy = sushiUSD * (sushiPerBlock * (60 / averageBlockTime) * 60 * 24 * 365) / tvl * 100 * 3; // *3 => vesting
+            const swipePerBlock = (masterchefPool.allocPoint / (totalAllocPoint) * 100);
+            const apy = swipeUSD * (swipePerBlock * (60 / averageBlockTime) * 60 * 24 * 365) / tvl * 100 * 3; // *3 => vesting
 
             return {...masterchefPool, apy};
         });
@@ -154,8 +154,8 @@ const info = {
         'migrator',
         'owner',
         'startBlock',
-        'sushi',
-        'sushiPerBlock',
+        'swipe',
+        'swipePerBlock',
         'totalAllocPoint',
         'poolCount',
         'slpBalance',
@@ -174,7 +174,7 @@ const info = {
             migrator: results.migrator,
             owner: results.owner,
             startBlock: Number(results.startBlock),
-            sushiPerBlock: results.sushiPerBlock / 1e18,
+            swipePerBlock: results.swipePerBlock / 1e18,
             totalAllocPoint: Number(results.totalAllocPoint),
             poolCount: Number(results.poolCount),
             slpBalance: Number(results.slpBalance),
@@ -193,7 +193,7 @@ const pools = {
         'pair',
         'allocPoint',
         'lastRewardBlock',
-        'accSushiPerShare',
+        'accSwipePerShare',
         'balance',
         'userCount',
         'slpBalance',
@@ -206,17 +206,17 @@ const pools = {
         'updatedAt',
         'entryUSD',
         'exitUSD',
-        'sushiHarvested',
-        'sushiHarvestedUSD'
+        'swipeHarvested',
+        'swipeHarvestedUSD'
     ],
 
     callback(results) {
-        return results.map(({ id, pair, allocPoint, lastRewardBlock, accSushiPerShare, balance, userCount, slpBalance, slpAge, slpAgeRemoved, slpDeposited, slpWithdrawn, timestamp, block, updatedAt, entryUSD, exitUSD, sushiHarvested, sushiHarvestedUSD }) => ({
+        return results.map(({ id, pair, allocPoint, lastRewardBlock, accSwipePerShare, balance, userCount, slpBalance, slpAge, slpAgeRemoved, slpDeposited, slpWithdrawn, timestamp, block, updatedAt, entryUSD, exitUSD, swipeHarvested, swipeHarvestedUSD }) => ({
             id: Number(id),
             pair: pair,
             allocPoint: Number(allocPoint),
             lastRewardBlock: Number(lastRewardBlock),
-            accSushiPerShare: accSushiPerShare / 1e18,
+            accSwipePerShare: accSwipePerShare / 1e18,
             userCount: Number(userCount),
             slpBalance: Number(slpBalance),
             slpAge: Number(slpAge),
@@ -230,8 +230,8 @@ const pools = {
             lastUpdatedDate: new Date(updatedAt * 1000),
             entryUSD: Number(entryUSD),
             exitUSD: Number(exitUSD),
-            sushiHarvested: Number(sushiHarvested),
-            sushiHarvestedUSD: Number(sushiHarvestedUSD)
+            swipeHarvested: Number(swipeHarvested),
+            swipeHarvestedUSD: Number(swipeHarvestedUSD)
          }));
     }
 };
@@ -258,16 +258,16 @@ const user = {
     properties: [
         'id',
         'address',
-        'pool { id, pair, balance, accSushiPerShare, lastRewardBlock }',
+        'pool { id, pair, balance, accSwipePerShare, lastRewardBlock }',
         'amount',
         'rewardDebt',
         'entryUSD',
         'exitUSD',
-        'sushiAtLockup',
-        'sushiHarvested',
-        'sushiHarvestedUSD',
-        'sushiHarvestedSinceLockup',
-        'sushiHarvestedSinceLockupUSD',
+        'swipeAtLockup',
+        'swipeHarvested',
+        'swipeHarvestedUSD',
+        'swipeHarvestedSinceLockup',
+        'swipeHarvestedSinceLockupUSD',
     ],
 
     callback(results) {
@@ -279,18 +279,18 @@ const user = {
                 id: entry.pool.id,
                 pair: entry.pool.pair,
                 balance: Number(entry.pool.balance),
-                accSushiPerShare: Number(entry.pool.accSushiPerShare),
+                accSwipePerShare: Number(entry.pool.accSwipePerShare),
                 lastRewardBlock: Number(entry.pool.lastRewardBlock)
             },
             amount: Number(entry.amount),
             rewardDebt: Number(entry.rewardDebt),
             entryUSD: Number(entry.entryUSD),
             exitUSD: Number(entry.exitUSD),
-            sushiAtLockup: Number(entry.sushiAtLockup),
-            sushiHarvested: Number(entry.sushiHarvested),
-            sushiHarvestedUSD: Number(entry.sushiHarvestedUSD),
-            sushiHarvestedSinceLockup: Number(entry.sushiHarvestedSinceLockup),
-            sushiHarvestedSinceLockupUSD: Number(entry.sushiHarvestedSinceLockupUSD)
+            swipeAtLockup: Number(entry.swipeAtLockup),
+            swipeHarvested: Number(entry.swipeHarvested),
+            swipeHarvestedUSD: Number(entry.swipeHarvestedUSD),
+            swipeHarvestedSinceLockup: Number(entry.swipeHarvestedSinceLockup),
+            swipeHarvestedSinceLockupUSD: Number(entry.swipeHarvestedSinceLockupUSD)
         }));
     }
 };
@@ -309,8 +309,8 @@ const apys = {
                 userCountChange: (result.userCount / result24h.userCount) * 100 - 100,
                 userCountChangeCount: result.userCount - result24h.userCount,
 
-                sushiHarvestedChange: (result.sushiHarvested / result24h.sushiHarvested) * 100 - 100,
-                sushiHarvestedChangeCount: result.sushiHarvested - result24h.sushiHarvested,
+                swipeHarvestedChange: (result.swipeHarvested / result24h.swipeHarvested) * 100 - 100,
+                swipeHarvestedChangeCount: result.swipeHarvested - result24h.swipeHarvested,
             });
         });
     }

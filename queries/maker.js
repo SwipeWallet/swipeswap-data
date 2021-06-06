@@ -53,7 +53,7 @@ module.exports = {
             query: {
                 entity: 'servers',
                 selection: {
-                    orderBy: 'sushiServed',
+                    orderBy: 'swipeServed',
                     orderDirection: 'desc',
                 },
                 block: block ? { number: block } : timestamp ? { number: await timestampToBlock(timestamp) } : undefined,
@@ -112,13 +112,13 @@ module.exports = {
 const info = {
     properties: [
         'id',
-        'sushiServed'
+        'swipeServed'
     ],
 
     callback(results) {
         return ({
             address: results.id,
-            sushiServed: Number(results.sushiServed)
+            swipeServed: Number(results.swipeServed)
         });
     }
 }
@@ -130,19 +130,19 @@ const servings = {
         'pair',
         'token0',
         'token1',
-        'sushiServed',
+        'swipeServed',
         'block',
         'timestamp'
     ],
 
     callback(results) {
-        return results.map(({ server, tx, pair, token0, token1, sushiServed, block, timestamp }) => ({
+        return results.map(({ server, tx, pair, token0, token1, swipeServed, block, timestamp }) => ({
             serverAddress: server.id,
             tx: tx,
             pair: pair,
             token0: token0,
             token1: token1,
-            sushiServed: Number(sushiServed),
+            swipeServed: Number(swipeServed),
             block: Number(block),
             timestamp: Number(timestamp * 1000),
             date: new Date(timestamp * 1000)
@@ -153,19 +153,19 @@ const servings = {
 const servers = {
     properties: [
         'id',
-        'sushiServed',
-        'servings(first: 1000, orderBy: block, orderDirection: desc) { tx, block, pair, sushiServed }'
+        'swipeServed',
+        'servings(first: 1000, orderBy: block, orderDirection: desc) { tx, block, pair, swipeServed }'
     ],
 
     callback(results) {
-        return results.map(({ id, sushiServed, servings }) => ({
+        return results.map(({ id, swipeServed, servings }) => ({
             serverAddress: id,
-            sushiServed: Number(sushiServed),
-            servings: servings.map(({ tx, block, pair, sushiServed}) => ({
+            swipeServed: Number(swipeServed),
+            servings: servings.map(({ tx, block, pair, swipeServed}) => ({
                 tx,
                 block: Number(block),
                 pair,
-                sushiServed: Number(sushiServed)
+                swipeServed: Number(swipeServed)
             })),
         }));
     }

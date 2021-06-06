@@ -6,7 +6,7 @@ const { Promise } = require('bluebird')
 
 const { graphAPIEndpoints } = require('./constants')
 
-const sushi = require('./queries/sushi');
+const swipe = require('./queries/swipe');
 const blocks = require('./queries/blocks');
 const charts = require('./queries/charts');
 const exchange = require('./queries/exchange');
@@ -21,7 +21,7 @@ const utils = require('./utils');
 module.exports = {
 	pageResults,
 	graphAPIEndpoints,
-	sushi,
+	swipe,
 	blocks,
 	charts,
 	exchange,
@@ -33,8 +33,8 @@ module.exports = {
 	lockup,
 	utils,
 	async timeseries({blocks = undefined, timestamps = undefined, target = undefined} = {}, targetArguments) {
-		if(!target) { throw new Error("sushi-data: Target function undefined"); }
-		if(!blocks && !timestamps) { throw new Error("sushi-data: Timeframe undefined"); }
+		if(!target) { throw new Error("swipe-data: Target function undefined"); }
+		if(!blocks && !timestamps) { throw new Error("swipe-data: Timeframe undefined"); }
 
 		if(blocks) {
 			return Promise.map(blocks, async (block) => ({

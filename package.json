@@ -1,7 +1,7 @@
 {
-	"name": "@swipewallet/swap-data",
+	"name": "@swipewallet/swipeswap-data",
 	"license": "MIT",
-	"version": "2.0.0",
+	"version": "1.0.0",
 	"author": "SwipeSwap",
 	"main": "index",
 	"scripts": {

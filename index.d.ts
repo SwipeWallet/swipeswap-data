@@ -1,4 +1,4 @@
-import sushi = require("./typings/sushi");
+import swipe = require("./typings/swipe");
 import blocks = require("./typings/blocks");
 import charts = require("./typings/charts");
 import exchange = require("./typings/exchange");
@@ -10,10 +10,10 @@ import timelock = require("./typings/timelock");
 import lockup = require("./typings/lockup");
 import utils = require("./typings/utils")
 
-export = SushiData;
-export as namespace SushiData;
+export = SwipeData;
+export as namespace SwipeData;
 
-declare namespace SushiData {
+declare namespace SwipeData {
 
     export declare function timeseries({ blocks, timestamps, target }: {
         blocks?: number[];
@@ -21,5 +21,5 @@ declare namespace SushiData {
         target: Function;
     }, targetArguments?: any): Promise<any>;
 
-    export { sushi, blocks, charts, exchange, exchange_v1, masterchef, bar, maker, timelock, lockup, utils };
+    export { swipe, blocks, charts, exchange, exchange_v1, masterchef, bar, maker, timelock, lockup, utils };
 }

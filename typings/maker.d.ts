@@ -1,6 +1,6 @@
 type Info = {
     address: string;
-    sushiServed: number;
+    swipeServed: number;
 }
 
 export function info({ block, timestamp }?: {
@@ -16,7 +16,7 @@ type Servings = {
     pair: string,
     token0: string,
     token1: string,
-    sushiServed: number,
+    swipeServed: number,
     block: number,
     timestamp: number,
     date: Date
@@ -34,12 +34,12 @@ export function servings({ minTimestamp, maxTimestamp, minBlock, maxBlock, max }
 
 type Servers = {
     serverAddress: string,
-    sushiServed: number,
+    swipeServed: number,
     servings: {
         tx: string,
         block: number,
         pair: string,
-        sushiServed: number
+        swipeServed: number
     }[]
 }
 
