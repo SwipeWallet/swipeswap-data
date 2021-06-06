@@ -1,18 +1,18 @@
 type Info = {
     decimals: number;
     name: string;
-    sushi: string;
+    swipe: string;
     symbol: string;
     totalSupply: number;
     ratio: number;
-    xSushiMinted: number;
-    xSushiBurned: number;
-    sushiStaked: number;
-    sushiStakedUSD: number;
-    sushiHarvested: number;
-    sushiHarvestedUSD: number;
-    xSushiAge: number;
-    xSushiAgeDestroyed: number;
+    xSwipeMinted: number;
+    xSwipeBurned: number;
+    swipeStaked: number;
+    swipeStakedUSD: number;
+    swipeHarvested: number;
+    swipeHarvestedUSD: number;
+    xSwipeAge: number;
+    xSwipeAgeDestroyed: number;
     updatedAt: number;
 }
 
@@ -32,24 +32,24 @@ export function observeInfo(): {
 
 
 type User = {
-    xSushi: number;
-    xSushiIn: number;
-    xSushiOut: number;
-    xSushiMinted: number;
-    xSushiBurned: number;
-    xSushiOffset: number;
-    xSushiAge: number;
-    xSushiAgeDestroyed: number;
-    sushiStaked: number;
-    sushiStakedUSD: number;
-    sushiHarvested: number;
-    sushiHarvestedUSD: number;
-    sushiIn: number;
-    sushiOut: number;
+    xSwipe: number;
+    xSwipeIn: number;
+    xSwipeOut: number;
+    xSwipeMinted: number;
+    xSwipeBurned: number;
+    xSwipeOffset: number;
+    xSwipeAge: number;
+    xSwipeAgeDestroyed: number;
+    swipeStaked: number;
+    swipeStakedUSD: number;
+    swipeHarvested: number;
+    swipeHarvestedUSD: number;
+    swipeIn: number;
+    swipeOut: number;
     usdOut: number;
     usdIn: number;
     updatedAt: number;
-    sushiOffset: number;
+    swipeOffset: number;
     usdOffset: number;
 }
 

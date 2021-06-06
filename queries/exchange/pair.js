@@ -18,7 +18,7 @@ const { ethPrice } = require('./../exchange/eth');
 
 module.exports = {
     async pair({block = undefined, timestamp = undefined, pair_address = undefined} = {}) {
-        if(!pair_address) { throw new Error("sushi-data: Pair address undefined"); }
+        if(!pair_address) { throw new Error("swipe-data: Pair address undefined"); }
 
         block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
         block = block ? `block: { number: ${block} }` : "";
@@ -35,7 +35,7 @@ module.exports = {
     },
 
     async pair24h({block = undefined, timestamp = undefined, pair_address = undefined} = {}) {
-        if(!pair_address) { throw new Error("sushi-data: Pair address undefined"); }
+        if(!pair_address) { throw new Error("swipe-data: Pair address undefined"); }
         
         let timestampNow = timestamp ? timestamp : block ? await blockToTimestamp(block) : (Math.floor(Date.now() / 1000));
         timestamp24ago = timestampNow - TWENTY_FOUR_HOURS;
@@ -56,7 +56,7 @@ module.exports = {
     },
 
     async pairHourData({minTimestamp = undefined, maxTimestamp = undefined, minBlock = undefined, maxBlock = undefined, pair_address = undefined} = {}) {
-        if(!pair_address) { throw new Error("sushi-data: Pair address undefined"); }
+        if(!pair_address) { throw new Error("swipe-data: Pair address undefined"); }
         
         minTimestamp = minBlock ? blockToTimestamp(minBlock) : minTimestamp;
         maxTimestamp = maxBlock ? blockToTimestamp(maxBlock) : maxTimestamp;
@@ -91,7 +91,7 @@ module.exports = {
     },
 
     async pairDayData({minTimestamp = undefined, maxTimestamp = undefined, minBlock = undefined, maxBlock = undefined, pair_address = undefined} = {}) {
-        if(!pair_address) { throw new Error("sushi-data: Pair address undefined"); }
+        if(!pair_address) { throw new Error("swipe-data: Pair address undefined"); }
         
         return pageResults({
             api: graphAPIEndpoints.exchange,
@@ -114,7 +114,7 @@ module.exports = {
     },
 
     observePair({pair_address = undefined}) {
-        if(!pair_address) { throw new Error("sushi-data: Pair address undefined"); }
+        if(!pair_address) { throw new Error("swipe-data: Pair address undefined"); }
 
         const query = gql`
             subscription {

@@ -18,7 +18,7 @@ const { ethPrice } = require('./../exchange/eth');
 
 module.exports = {
     async token({block = undefined, timestamp = undefined, token_address = undefined} = {}) {
-        if(!token_address) { throw new Error("sushi-data: Token address undefined"); }
+        if(!token_address) { throw new Error("swipe-data: Token address undefined"); }
 
         block = block ? block : timestamp ? (await timestampToBlock(timestamp)) : undefined;
         block = block ? `block: { number: ${block} }` : "";
@@ -35,7 +35,7 @@ module.exports = {
     },
 
     async token24h({block = undefined, timestamp = undefined, token_address = undefined} = {}) {
-        if(!token_address) { throw new Error("sushi-data: Token address undefined"); }
+        if(!token_address) { throw new Error("swipe-data: Token address undefined"); }
 
         let timestampNow = timestamp ? timestamp : block ? await blockToTimestamp(block) : (Math.floor(Date.now() / 1000));
         timestamp24ago = timestampNow - TWENTY_FOUR_HOURS;
@@ -56,7 +56,7 @@ module.exports = {
     },
 
     async tokenHourData({minTimestamp = undefined, maxTimestamp = undefined, minBlock = undefined, maxBlock = undefined, token_address = undefined} = {}) {
-        if(!token_address) { throw new Error("sushi-data: Token address undefined"); }
+        if(!token_address) { throw new Error("swipe-data: Token address undefined"); }
         
         minTimestamp = minBlock ? blockToTimestamp(minBlock) : minTimestamp;
         maxTimestamp = maxBlock ? blockToTimestamp(maxBlock) : maxTimestamp;
@@ -91,7 +91,7 @@ module.exports = {
     },
 
     async tokenDayData({minTimestamp = undefined, maxTimestamp = undefined, minBlock = undefined, maxBlock = undefined, token_address = undefined} = {}) {
-        if(!token_address) { throw new Error("sushi-data: Token address undefined"); }
+        if(!token_address) { throw new Error("swipe-data: Token address undefined"); }
         
         return pageResults({
             api: graphAPIEndpoints.exchange,
@@ -114,7 +114,7 @@ module.exports = {
     },
 
     observeToken({token_address = undefined}) {
-        if(!token_address) { throw new Error("sushi-data: Token address undefined"); }
+        if(!token_address) { throw new Error("swipe-data: Token address undefined"); }
 
         const query = gql`
             subscription {

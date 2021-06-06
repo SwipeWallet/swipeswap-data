@@ -5,7 +5,7 @@ type Info = {
     migrator: string;
     owner: string;
     startBlock: number;
-    sushiPerBlock: number;
+    swipePerBlock: number;
     totalAllocPoint: number;
     poolCount: number;
     slpBalance: number;
@@ -28,7 +28,7 @@ type Pool = {
     pair: string,
     allocPoint: number,
     lastRewardBlock: number,
-    accSushiPerShare: number,
+    accSwipePerShare: number,
     userCount: number,
     slpBalance: number,
     slpAge: number,
@@ -42,8 +42,8 @@ type Pool = {
     lastUpdatedDate: Date,
     entryUSD: number,
     exitUSD: number,
-    sushiHarvested: number,
-    sushiHarvestedUSD: number
+    swipeHarvested: number,
+    swipeHarvestedUSD: number
 }
 
 export function pool({ block, timestamp, pool_id, pool_address }: {
@@ -83,18 +83,18 @@ type User = {
         id: string,
         pair: string,
         balance: number,
-        accSushiPerShare: number,
+        accSwipePerShare: number,
         lastRewardBlock: number
     },
     amount: number,
     rewardDebt: number,
     entryUSD: number,
     exitUSD: number,
-    sushiAtLockup: number,
-    sushiHarvested: number,
-    sushiHarvestedUSD: number,
-    sushiHarvestedSinceLockup: number,
-    sushiHarvestedSinceLockupUSD: number
+    swipeAtLockup: number,
+    swipeHarvested: number,
+    swipeHarvestedUSD: number,
+    swipeHarvestedSinceLockup: number,
+    swipeHarvestedSinceLockupUSD: number
 }
 
 export function user({ block, timestamp, user_address }: {
@@ -119,6 +119,6 @@ export function apys24h({ block, timestamp}?: {
     slpBalanceChangeCount: number,
     userCountChange: number,
     userCountChangeCount: number,
-    sushiHarvestedChange: number,
-    sushiHarvestedChangeCount: number
+    swipeHarvestedChange: number,
+    swipeHarvestedChangeCount: number
 })[]>;
